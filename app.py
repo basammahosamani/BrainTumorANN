@@ -5,7 +5,7 @@ from PIL import Image
 import time
 
 # Load Model
-model = tf.keras.models.load_model("brain_tumor_ann.h5")
+model = tf.keras.models.load_model("brain_tumor_ann.keras")
 
 # Class Labels
 classes = [
@@ -39,7 +39,7 @@ if uploaded_file is not None:
 
         start = time.time()
 
-        img = image.resize((224, 224))
+        img = image.resize((64, 64))
         img = np.array(img) / 255.0
         img = np.expand_dims(img, axis=0)
 
@@ -72,7 +72,8 @@ if uploaded_file is not None:
 
         # Model Details
         st.subheader("Model Details")
-        st.write("Hidden Layers : 512 → 256 → 128")
+        st.write("Input Image Size : 64 × 64")
+        st.write("Hidden Layers : 128 → 64 → 32")
         st.write("Activation : ReLU")
         st.write("Output : Softmax")
         st.write("Optimizer : Adam")

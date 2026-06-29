@@ -4,7 +4,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Flatten, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
 
-IMG_SIZE = (224,224)
+IMG_SIZE = (64,64)
 BATCH_SIZE = 32
 
 train_datagen = ImageDataGenerator(
@@ -31,11 +31,11 @@ val_data = val_datagen.flow_from_directory(
 )
 
 model = Sequential([
-    Flatten(input_shape=(224,224,3)),
-    Dense(512,activation="relu"),
-    Dropout(0.5),
-    Dense(256,activation="relu"),
+    Flatten(input_shape=(64,64,3)),
     Dense(128,activation="relu"),
+    Dropout(0.5),
+    Dense(64,activation="relu"),
+    Dense(32,activation="relu"),
     Dense(4,activation="softmax")
 ])
 
@@ -51,6 +51,6 @@ model.fit(
     epochs=10
 )
 
-model.save("brain_tumor_ann.h5")
+model.save("brain_tumor_ann.keras")
 
-print("Model Saved Successfully")
+print("Model Saved Successfully as brain_tumor_ann.keras")
